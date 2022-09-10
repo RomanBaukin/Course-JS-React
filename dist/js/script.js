@@ -184,13 +184,18 @@ window.addEventListener('DOMContentLoaded', function () {
 
   const modalTriggers = document.querySelectorAll('[data-modal]'),
         modalCloseBtn = document.querySelector('[data-close]'),
-        modal = document.querySelector('.modal');
+        modal = document.querySelector('.modal'),
+        modalTimer = setTimeout(openModal, 15000);
+
+  function openModal() {
+    modal.classList.add('show');
+    modal.classList.remove('hide');
+    document.body.style.overflow = 'hidden';
+    clearInterval(modalTimer);
+  }
+
   modalTriggers.forEach(btn => {
-    btn.addEventListener('click', () => {
-      modal.classList.add('show');
-      modal.classList.remove('hide');
-      document.body.style.overflow = 'hidden';
-    });
+    btn.addEventListener('click', openModal);
   });
 
   function closeModal() {
